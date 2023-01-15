@@ -1,0 +1,10 @@
+.venv
+dist
+__pycache__
+.vscode
+.coverage
+cc-test-reporter
+coverage.xml
+.pytest_cache
+**/.vscode/
+test-coverage
