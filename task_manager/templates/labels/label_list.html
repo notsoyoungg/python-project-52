@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<h1 class="my-4">Метки</h1>
+<a class="nav-link" href="{% url 'create_label' %}">Создать метку</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Дата создания</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for label in label_list %}
+    <tr>
+      <td>{{ label.pk }}</td>
+      <td>{{ label.name }}</td>
+      <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
+      <td>
+        <a href="{% url 'label_update' label.pk %}">Изменить</a>
+        <br>
+        <a href="{% url 'label_delete' label.pk %}">Удалить</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
