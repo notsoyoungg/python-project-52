@@ -10,12 +10,12 @@ def index(request):
 
 class UserLoginView(SuccessMessageMixin, views.LoginView):
     next_page = reverse_lazy('index')
-    success_message = 'Вы успешно залогинены'
+    success_message = 'Вы залогинены'
 
 
 class UserLogoutView(SuccessMessageMixin, views.LogoutView):
     next_page = reverse_lazy('index')
-    success_message = 'Вы успешно разлогинены'
+    success_message = 'Вы разлогинены'
 
 
     def dispatch(self, request, *args, **kwargs):
