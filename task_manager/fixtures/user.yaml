@@ -1,0 +1,13 @@
+- model: users.siteuser
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$390000$eyXselLJn92JazjEm0G7u7$2VOV5lwQZO6nyW1wPlqb9Q2qaKYVUguiHTMwXq5t+ls=
+    last_login: 2023-12-23 14:52
+    is_superuser: False
+    username: testuser1
+    email: None
+    is_staff: False
+    is_active: True
+    date_joined: 2023-12-20
+    first_name: qwerty
+    last_name: ytrewq

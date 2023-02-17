@@ -1,0 +1,5 @@
+- model: statuses.statuses
+  pk: 1
+  fields:
+    name: In progress
+    created_at: 2023-12-21

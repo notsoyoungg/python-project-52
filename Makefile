@@ -2,7 +2,10 @@ runserver:
 	python manage.py runserver
 
 makemig:
-	python manage.py makemirgations
+	python manage.py makemigrations
+
+test:
+	python manage.py test
 
 # install:
 # 	poetry install

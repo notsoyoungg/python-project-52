@@ -10,7 +10,7 @@ class Tasks(models.Model):
     description = models.TextField(verbose_name='Описание')
     status = models.ForeignKey(Statuses, on_delete=models.PROTECT, verbose_name='Статус')
     executor = models.ForeignKey(SiteUser, on_delete=models.PROTECT, verbose_name='Исполнитель', related_name='executor_id')
-    labels = models.ManyToManyField(Label, verbose_name='Метки')
+    labels = models.ManyToManyField(Label, verbose_name='Метки', through="TasksLabels")
     created_at = models.DateTimeField(auto_now=True)
 
 
@@ -19,3 +19,8 @@ class Tasks(models.Model):
         String for representing the MyModelName object (in Admin site etc.)
         """
         return self.name
+
+
+class TasksLabels(models.Model):
+    task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
+    labels = models.ForeignKey(Label, on_delete=models.PROTECT)

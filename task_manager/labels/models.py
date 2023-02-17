@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.exceptions import PermissionDenied
 
 # Create your models here.
 class Label(models.Model):
@@ -11,8 +10,3 @@ class Label(models.Model):
         String for representing the MyModelName object (in Admin site etc.)
         """
         return self.name
-    
-    def delete(self, *args, **kwargs):
-        if self.tasks_set.exists():
-            raise PermissionDenied("Can't delete label because it's associated with tasks")
-        super().delete(*args, **kwargs)

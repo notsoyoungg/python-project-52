@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from task_manager.users.models import SiteUser
@@ -11,13 +10,10 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 # Create your views here.
-
-
-
 class RegistrationView(SuccessMessageMixin, CreateView):
     """User registration view."""
     form_class = UserCreation
-    success_message = 'Вы успешно зарегистрированы'
+    success_message = 'Пользователь успешно зарегистрирован'
     success_url = reverse_lazy('login')
     template_name = 'form.html'
     extra_context = {'header': 'Регистрация',
@@ -31,7 +27,7 @@ class UserListView(generic.ListView):
 class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     login_url = '/login/'
     model = SiteUser
-    success_message = 'Пользователь удален'
+    success_message = 'Пользователь успешно удалён'
     success_url = reverse_lazy('user_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
@@ -50,7 +46,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login/'
     form_class = UserCreation
     model = SiteUser
-    success_message = 'Данные пользователя обновлены'
+    success_message = 'Пользователь успешно изменён'
     success_url = reverse_lazy('user_list')
     template_name = 'form.html'
     extra_context = {'header': 'Изменение пользователя',

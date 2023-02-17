@@ -11,12 +11,11 @@ from django.views.generic.detail import DetailView
 
 # Create your views here.
 class TaskCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    """User registration view."""
     login_url = '/login/'
     form_class = TaskForm
     template_name = 'form.html'
-    success_message = 'Задача добавлена'
-    success_url = reverse_lazy('index')
+    success_message = 'Задача успешно создана'
+    success_url = reverse_lazy('tasks_list')
     extra_context = {'header': 'Создать задачу',
                      'button': 'Создать'}
 
@@ -38,8 +37,8 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     login_url = '/login/'
     model = Tasks
-    success_message = 'Задача удалена'
-    success_url = reverse_lazy('index')
+    success_message = 'Задача успешно удалена'
+    success_url = reverse_lazy('tasks_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
     extra_context = {'obj_name': 'задачи'}
@@ -58,7 +57,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {'header': 'Изменение задачи',
                      'button': 'Изменить'}
     model = Tasks
-    success_message = 'Задача обновлена'
-    success_url = reverse_lazy('index')
+    success_message = 'Задача успешно изменена'
+    success_url = reverse_lazy('tasks_list')
     template_name = 'form.html'
     
