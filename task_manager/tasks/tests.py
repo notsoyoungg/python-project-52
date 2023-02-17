@@ -50,4 +50,3 @@ class TestStatuses(TestCase):
         self.assertEqual(response2.status_code, 302)
         self.assertRedirects(response2, reverse('label_list'))
         self.assertEqual(label.count(), 0)
-
