@@ -16,20 +16,15 @@ class TaskFilter(django_filters.FilterSet):
     labels = django_filters.ModelChoiceFilter(queryset=Label.objects.all(),
         label='Метка',
         widget=forms.Select(attrs={'class': 'form-control'}))
-    uncategorized = django_filters.BooleanFilter(field_name='creator', lookup_expr='istrue')
-
-
+    self_tasks = django_filters.BooleanFilter(field_name='creator', method='filter_only_current_user',
+        label='Только свои задачи',
+        widget=forms.CheckboxInput(attrs={'class': "form-check", 'name': 'jopa'}))
     class Meta:
         model = Tasks
-        fields = ['status', 'executor', 'labels', 'creator']
-        # widgets = {
-        #     'labels': forms.ChoiceField(choices=Label.objects.all(), forms.Select = {'classs': 'form-control'})
-        # }
+        fields = ['status', 'executor', 'labels']
+        
 
-    
-    @property
-    def qs(self):
-        parent = super().qs
-        creator = getattr(self.request, 'user', None)
-
-        return parent.filter(creator=creator)
+    def filter_only_current_user(self, queryset, name, value):
+        if value:
+            return queryset.filter(creator=self.request.user)
+        return queryset
