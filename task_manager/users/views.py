@@ -32,7 +32,7 @@ class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView
     login_url = '/login/'
     model = SiteUser
     success_message = 'Пользователь удален'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('user_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
     extra_context = {'obj_name': 'пользователя'}
