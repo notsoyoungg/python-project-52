@@ -9,4 +9,4 @@ class SiteUser(AbstractUser):
     last_name = models.CharField(max_length=150, verbose_name='Фамилия')
     def __str__(self):
         """Represent an instance as a string."""
-        return self.username
+        return f'{self.first_name} {self.last_name}'
