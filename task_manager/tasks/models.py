@@ -9,7 +9,7 @@ class Tasks(models.Model):
     creator = models.ForeignKey(SiteUser, on_delete=models.PROTECT)
     description = models.TextField(verbose_name='Описание')
     status = models.ForeignKey(Statuses, on_delete=models.PROTECT, verbose_name='Статус')
-    executor = models.ForeignKey(SiteUser, on_delete=models.PROTECT, verbose_name='Исполнитель', related_name='executor')
+    executor = models.ForeignKey(SiteUser, on_delete=models.PROTECT, verbose_name='Исполнитель', related_name='executor', null=True, blank=True,)
     labels = models.ManyToManyField(Label, verbose_name='Метки', through="TasksLabels")
     created_at = models.DateTimeField(auto_now=True)
 
