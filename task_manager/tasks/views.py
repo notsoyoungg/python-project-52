@@ -10,6 +10,8 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic.detail import DetailView
 
 # Create your views here.
+
+
 class TaskCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login/'
     form_class = TaskForm
@@ -60,4 +62,3 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Задача успешно изменена'
     success_url = reverse_lazy('tasks_list')
     template_name = 'form.html'
-    

@@ -11,6 +11,8 @@ from django.shortcuts import redirect
 from django.db.models.deletion import ProtectedError
 
 # Create your views here.
+
+
 class StatuseCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """User registration view."""
     login_url = '/login/'

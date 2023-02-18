@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib import messages
-from django.db.models.deletion import ProtectedError
+
 
 # Create your models here.
 class Statuses(models.Model):

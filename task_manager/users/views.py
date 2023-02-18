@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 # Create your views here.
+
+
 class RegistrationView(SuccessMessageMixin, CreateView):
     """User registration view."""
     form_class = UserCreation

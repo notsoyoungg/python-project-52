@@ -4,6 +4,8 @@ from .models import Statuses
 from task_manager.users.models import SiteUser
 
 # Create your tests here.
+
+
 class TestStatuses(TestCase):
 
     def setUp(self):
@@ -11,7 +13,7 @@ class TestStatuses(TestCase):
         self.test_status.save()
         self.test_user1 = SiteUser.objects.create_user(username='testuser1', password='12345')
         self.test_user1.save()
-        
+
     def test_status_create_view(self):
         user = self.test_user1
         self.client.force_login(user)
@@ -39,7 +41,7 @@ class TestStatuses(TestCase):
         self.assertEqual(users.count(), 1)
 
     def test_status_delete_view(self):
-        status_id = self.test_status.pk 
+        status_id = self.test_status.pk
         user = self.test_user1
         self.client.force_login(user)
         url = reverse('status_delete', args=(status_id,))

@@ -4,6 +4,8 @@ from .models import Label
 from task_manager.users.models import SiteUser
 
 # Create your tests here.
+
+
 class TestStatuses(TestCase):
 
     def setUp(self):
@@ -11,7 +13,7 @@ class TestStatuses(TestCase):
         self.test_label.save()
         self.test_user1 = SiteUser.objects.create_user(username='testuser1', password='12345')
         self.test_user1.save()
-        
+
     def test_label_create_view(self):
         user = self.test_user1
         self.client.force_login(user)
@@ -39,7 +41,7 @@ class TestStatuses(TestCase):
         self.assertEqual(label.count(), 1)
 
     def test_label_delete_view(self):
-        label_id = self.test_label.pk 
+        label_id = self.test_label.pk
         user = self.test_user1
         self.client.force_login(user)
         url = reverse('label_delete', args=(label_id,))

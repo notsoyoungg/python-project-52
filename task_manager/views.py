@@ -8,6 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 def index(request):
     return render(request, 'index.html')
 
+
 class UserLoginView(SuccessMessageMixin, views.LoginView):
     next_page = reverse_lazy('index')
     success_message = 'Вы залогинены'
@@ -16,7 +17,6 @@ class UserLoginView(SuccessMessageMixin, views.LoginView):
 class UserLogoutView(SuccessMessageMixin, views.LogoutView):
     next_page = reverse_lazy('index')
     success_message = 'Вы разлогинены'
-
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:

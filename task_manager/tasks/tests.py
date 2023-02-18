@@ -3,6 +3,8 @@ from django.urls import reverse
 from .models import Tasks, SiteUser, Label, Statuses
 
 # Create your tests here.
+
+
 class TestTask(TestCase):
 
     fixtures = ['task.yaml', 'status.yaml', 'label.yaml', 'user.yaml']
@@ -12,7 +14,7 @@ class TestTask(TestCase):
         self.status = Statuses.objects.get(pk=1)
         self.test_user1 = SiteUser.objects.get(pk=1)
         self.task = Tasks.objects.get(pk=1)
-        
+
     def test_task_create_view(self):
         user = self.test_user1
         self.client.force_login(user)
@@ -50,7 +52,7 @@ class TestTask(TestCase):
         self.assertEqual(task.count(), 1)
 
     def test_task_delete_view(self):
-        task_id = self.task.pk 
+        task_id = self.task.pk
         user = self.test_user1
         self.client.force_login(user)
         url = reverse('task_delete', args=(task_id,))

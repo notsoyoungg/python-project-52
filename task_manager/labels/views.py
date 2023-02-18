@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 # Create your views here.
+
+
 class LabelCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """User registration view."""
     login_url = '/login/'
@@ -20,7 +22,6 @@ class LabelCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     extra_context = {'header': 'Создать метку',
                      'button': 'Создать'}
-
 
 
 class LabelListView(LoginRequiredMixin, generic.ListView):

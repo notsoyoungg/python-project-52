@@ -3,12 +3,14 @@ from django.urls import reverse
 from .models import SiteUser
 
 # Create your tests here.
+
+
 class TestUSers(TestCase):
 
     def setUp(self):
         self.test_user1 = SiteUser.objects.create_user(username='testuser1', password='12345')
         self.test_user1.save()
-        
+
     def test_user_create_view(self):
         url = reverse('register')
         response1 = self.client.get(url)
