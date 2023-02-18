@@ -15,6 +15,6 @@ class TaskForm(ModelForm):
     class Meta:
         model = Tasks
         fields = ['name', 'description', 'status', 'executor', 'labels']
-        widgets = {
-            'description': forms.Textarea(attrs={'required': False}),
-        }
+        # widgets = {
+        #     'description': forms.Textarea(attrs={'required': False}),
+        # }
