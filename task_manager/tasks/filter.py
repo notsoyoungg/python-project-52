@@ -1,11 +1,7 @@
 import django_filters
 from .models import Tasks
 from task_manager.labels.models import Label
-from task_manager.statuses.models import Statuses
-from task_manager.users.models import SiteUser
 from django import forms
-from django.db.models import Value
-from django.db.models.functions import Concat
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -16,7 +12,7 @@ class TaskFilter(django_filters.FilterSet):
         label='Только свои задачи',
         widget=forms.CheckboxInput(attrs={'class': "form-check"}))
 
-        
+
     class Meta:
         model = Tasks
         fields = ['status', 'executor', 'labels']

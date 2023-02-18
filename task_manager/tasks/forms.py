@@ -10,7 +10,8 @@ class TaskForm(ModelForm):
 
     labels = forms.ModelMultipleChoiceField(
         queryset=Label.objects.all(),
-        label='Метки'
+        label='Метки',
+        required=False
     )
     class Meta:
         model = Tasks
