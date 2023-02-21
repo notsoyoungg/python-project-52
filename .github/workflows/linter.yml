@@ -1,0 +1,19 @@
+# This workflow will lint python code
+
+name: my linter
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.8.1
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+      - name: Run linter
+        run: |
+          make lint
