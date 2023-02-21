@@ -10,3 +10,4 @@ coverage.xml
 test-coverage
 .env
 db.sqlite3
+test-coverge-tool

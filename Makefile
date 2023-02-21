@@ -7,6 +7,12 @@ makemig:
 test:
 	python manage.py test
 
+test-cov:
+	coverage run --source='.' manage.py test
+
+xml:
+	coverage xml
+
 lint:
 	poetry run flake8 task_manager --exclude migrations
 
