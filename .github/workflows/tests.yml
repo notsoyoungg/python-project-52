@@ -28,5 +28,6 @@ jobs:
       - name: sending reporter
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_REPORTER_ID }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           ./cc-test-reporter after-build -r "$GITHUB_TOKEN"
