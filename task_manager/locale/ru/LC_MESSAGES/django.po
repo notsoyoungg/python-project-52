@@ -103,8 +103,6 @@ msgid "Status change"
 msgstr "Изменение статуса"
 
 #: task_manager/tasks/models.py:15
-#, fuzzy
-#| msgid "Deletion"
 msgid "Description"
 msgstr "Описание"
 
