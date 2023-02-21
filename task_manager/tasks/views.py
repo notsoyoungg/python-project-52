@@ -20,11 +20,8 @@ class TaskCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     text1 = _('Task succesfully created')
     text2 = _('Create task')
     text3 = _('Create')
-    # success_message = 'Задача успешно создана'
     success_message = text1
     success_url = reverse_lazy('tasks_list')
-    # extra_context = {'header': 'Создать задачу',
-    #                  'button': 'Создать'}
     extra_context = {'header': text2,
                      'button': text3}
 
@@ -48,12 +45,10 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView
     model = Tasks
     text1 = _('Task succesfully deleted')
     text2 = _('task')
-    # success_message = 'Задача успешно удалена'
     success_message = text1
     success_url = reverse_lazy('tasks_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
-    # extra_context = {'obj_name': 'задачи'}
     extra_context = {'obj_name': text2}
 
     def dispatch(self, request, *args, **kwargs):
@@ -70,12 +65,9 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     text1 = _('Task succesfully changed')
     text2 = _('Tasks change')
     text3 = _('Change')
-    # extra_context = {'header': 'Изменение задачи',
-    #                  'button': 'Изменить'}
     extra_context = {'header': text2,
                      'button': text3}
     model = Tasks
-    # success_message = 'Задача успешно изменена'
     success_message = text1
     success_url = reverse_lazy('tasks_list')
     template_name = 'form.html'

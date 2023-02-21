@@ -22,11 +22,8 @@ class StatuseCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     text1 = _('Status succesfully created')
     text2 = _('Create status')
     text3 = _('Create')
-    # extra_context = {'header': 'Создать статус',
-    #                  'button': 'Создать'}
     extra_context = {'header': text2,
                      'button': text3}
-    # success_message = 'Статус успешно создан'
     success_message = text1
     success_url = reverse_lazy('statuses_list')
 
@@ -43,9 +40,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteVi
     context_object_name = 'object'
     text1 = _('Status succesfully deleted')
     text2 = _('status')
-    # extra_context = {'obj_name': 'статуса'}
     extra_context = {'obj_name': text2}
-    # success_message = 'Статус успешно удалён'
     success_message = text1
     success_url = reverse_lazy('statuses_list')
 
@@ -54,7 +49,6 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteVi
             return super().dispatch(request, *args, **kwargs)
         except ProtectedError:
             text3 = _('Cannot delete status because it is in use')
-            # messages.error(request, 'Невозможно удалить статус, потому что он используется')
             messages.error(request, text3)
             return redirect('statuses_list')
 
@@ -66,11 +60,8 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     text1 = _('Status succesfully changed')
     text2 = _('Status change')
     text3 = _('Change')
-    # success_message = 'Статус успешно изменён'
     success_message = text1
     success_url = reverse_lazy('statuses_list')
     template_name = 'form.html'
-    # extra_context = {'header': 'Изменение статуса',
-    #                  'button': 'Изменить'}
     extra_context = {'header': text2,
                      'button': text3}
