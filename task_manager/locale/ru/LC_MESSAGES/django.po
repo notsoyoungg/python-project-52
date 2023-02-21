@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 19:43+0600\n"
+"POT-Creation-Date: 2023-02-21 20:31+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: task_manager/labels/models.py:9 task_manager/statuses/models.py:7
+#: task_manager/tasks/models.py:12
+#: task_manager/templates/statuses/statuses_list.html:11
+#: task_manager/templates/tasks/tasks_filter.html:22
+#: task_manager/users/models.py:11
+msgid "Name"
+msgstr "Имя"
 
 #: task_manager/labels/views.py:21
 msgid "Label succesfully created"
@@ -37,7 +45,8 @@ msgstr "Создать"
 msgid "Label succesfully deleted"
 msgstr "Метка успешно удалена"
 
-#: task_manager/labels/views.py:43 task_manager/templates/navigation.html:14
+#: task_manager/labels/views.py:43 task_manager/tasks/models.py:29
+#: task_manager/templates/navigation.html:14
 #: task_manager/templates/tasks/tasks_detail.html:32
 msgid "Labels"
 msgstr "Метки"
@@ -92,6 +101,23 @@ msgstr "Статус успешно изменён"
 #: task_manager/statuses/views.py:67
 msgid "Status change"
 msgstr "Изменение статуса"
+
+#: task_manager/tasks/models.py:15
+#, fuzzy
+#| msgid "Deletion"
+msgid "Description"
+msgstr "Описание"
+
+#: task_manager/tasks/models.py:17
+#: task_manager/templates/tasks/tasks_detail.html:23
+#: task_manager/templates/tasks/tasks_filter.html:23
+msgid "Status"
+msgstr "Статус"
+
+#: task_manager/tasks/models.py:24
+#: task_manager/templates/tasks/tasks_filter.html:25
+msgid "Executor"
+msgstr "Исполнитель"
 
 #: task_manager/tasks/views.py:20
 msgid "Task succesfully created"
@@ -156,7 +182,6 @@ msgid "Users"
 msgstr "Пользователи"
 
 #: task_manager/templates/navigation.html:11
-#: task_manager/templates/statuses/statuses_list copy.html:5
 #: task_manager/templates/statuses/statuses_list.html:5
 msgid "Statuses"
 msgstr "Статусы"
@@ -186,11 +211,6 @@ msgstr "Вход"
 msgid "Log in"
 msgstr "Войти"
 
-#: task_manager/templates/statuses/statuses_list.html:11
-#: task_manager/templates/tasks/tasks_filter.html:22
-msgid "Name"
-msgstr "Имя"
-
 #: task_manager/templates/statuses/statuses_list.html:12
 #: task_manager/templates/tasks/tasks_detail.html:27
 #: task_manager/templates/tasks/tasks_filter.html:26
@@ -218,18 +238,9 @@ msgstr "Автор"
 msgid "Excutor"
 msgstr "Исполнитель"
 
-#: task_manager/templates/tasks/tasks_detail.html:23
-#: task_manager/templates/tasks/tasks_filter.html:23
-msgid "Status"
-msgstr "Статус"
-
 #: task_manager/templates/tasks/tasks_filter.html:14
 msgid "Show"
 msgstr "Показать"
-
-#: task_manager/templates/tasks/tasks_filter.html:25
-msgid "Executor"
-msgstr "Исполнитель"
 
 #: task_manager/templates/users/siteuser_list.html:11
 msgid "Username"
@@ -238,6 +249,12 @@ msgstr "Имя пользователя"
 #: task_manager/templates/users/siteuser_list.html:12
 msgid "Full name"
 msgstr "Полное имя"
+
+#: task_manager/users/models.py:12
+#, fuzzy
+#| msgid "Username"
+msgid "Surname"
+msgstr "Фамилия"
 
 #: task_manager/users/views.py:19
 msgid "User succesfully registered"
@@ -267,10 +284,10 @@ msgstr "Пользователь успешно изменён"
 msgid "User change"
 msgstr "Изменение пользователя"
 
-#: task_manager/views.py:16
+#: task_manager/views.py:15
 msgid "You are logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/views.py:23
+#: task_manager/views.py:21 task_manager/views.py:28
 msgid "You are logged out"
 msgstr "Вы разлогинены"
