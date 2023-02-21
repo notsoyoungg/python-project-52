@@ -10,8 +10,8 @@ test:
 lint:
 	poetry run flake8 task_manager/
 
-# install:
-# 	poetry install
+install:
+	poetry install
 
 # build:
 # 	poetry build
