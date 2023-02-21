@@ -8,3 +8,5 @@ coverage.xml
 .pytest_cache
 **/.vscode/
 test-coverage
+.env
+db.sqlite3
