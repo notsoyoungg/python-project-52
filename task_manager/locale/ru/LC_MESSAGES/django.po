@@ -251,8 +251,6 @@ msgid "Full name"
 msgstr "Полное имя"
 
 #: task_manager/users/models.py:12
-#, fuzzy
-#| msgid "Username"
 msgid "Surname"
 msgstr "Фамилия"
 
