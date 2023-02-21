@@ -1,5 +1,8 @@
 name: tests
 on: push
+env:
+  GITHUB_TOKEN: ${{ secrets.TEST_REPORTER_ID }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,8 +29,5 @@ jobs:
           make test-cov
           make xml
       - name: sending reporter
-        env:
-          GITHUB_TOKEN: ${{ secrets.TEST_REPORTER_ID }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           ./cc-test-reporter after-build -r "$GITHUB_TOKEN"
