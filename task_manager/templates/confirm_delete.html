@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 {% block content %}
-<h1 class="my-4">Удаление {{ obj_name }}</h1>
-<p>Вы уверены, что хотите удалить {{ object.name }}{% if object.username %} {{ object.username }} {{ object.last_name }}{% endif %}?</p>
+{% load i18n %}
+<h1 class="my-4">{% trans "Deletion" %} {{ obj_name }}</h1>
+<p>{% trans "Are you sure you want to delete" %} {{ object.name }}{% if object.username %} {{ object.username }} {{ object.last_name }}{% endif %}?</p>
 <form method="post">
     {% csrf_token %}
-    <input class="btn btn-danger" type="submit" value="Да, удалить">
+    <input class="btn btn-danger" type="submit" value="{% trans 'Yes, delete' %}">
 </form>
 {% endblock %}

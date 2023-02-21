@@ -3,13 +3,13 @@
 {% block content %}
 {% load i18n %}
 <h1 class="my-4">{% trans "Statuses" %}</h1>
-<a class="nav-link" href="{% url 'create_status' %}">{% trans "Create status" %}</a>
+<a class="nav-link" href="{% url 'create_status' %}">Создать статус</a>
 <table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
-      <th>{% trans "Name" %}</th>
-      <th>{% trans "Creation date" %}</th>
+      <th>Имя</th>
+      <th>Дата создания</th>
       <th></th>
     </tr>
   </thead>
@@ -20,9 +20,9 @@
       <td>{{ status.name }}</td>
       <td>{{ status.created_at|date:"d.m.Y H:i" }}</td>
       <td>
-        <a href="{% url 'status_update' status.pk %}">{% trans "Change" %}</a>
+        <a href="{% url 'status_update' status.pk %}">Изменить</a>
         <br>
-        <a href="{% url 'status_delete' status.pk %}">{% trans "Delete" %}</a>
+        <a href="{% url 'status_delete' status.pk %}">Удалить</a>
       </td>
     </tr>
     {% endfor %}

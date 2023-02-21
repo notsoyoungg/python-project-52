@@ -7,6 +7,9 @@ makemig:
 test:
 	python manage.py test
 
+lint:
+	poetry run flake8 task_manager/
+
 # install:
 # 	poetry install
 
