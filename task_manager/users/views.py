@@ -26,7 +26,10 @@ class UserListView(generic.ListView):
     model = SiteUser
 
 
-class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin2, generic.DeleteView):
+class UserDeleteView(LoginRequiredMixin,
+                     SuccessMessageMixin,
+                     PermRequiredMixin2,
+                     generic.DeleteView):
     login_url = '/login/'
     model = SiteUser
     success_message = _('User succesfully deleted')

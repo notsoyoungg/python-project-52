@@ -6,9 +6,6 @@ from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext as _
 from task_manager.mixins import PermRequiredMixin1
 
@@ -31,7 +28,10 @@ class StatusesListView(LoginRequiredMixin, SuccessMessageMixin, generic.ListView
     model = Statuses
 
 
-class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin1, generic.DeleteView):
+class StatusDeleteView(LoginRequiredMixin,
+                       SuccessMessageMixin,
+                       PermRequiredMixin1,
+                       generic.DeleteView):
     login_url = '/login/'
     model = Statuses
     template_name = 'confirm_delete.html'
