@@ -6,9 +6,8 @@ from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
-from django.contrib import messages
 from django.utils.translation import gettext as _
+from task_manager.mixins import PermRequiredMixin2
 
 # Create your views here.
 
@@ -16,59 +15,33 @@ from django.utils.translation import gettext as _
 class RegistrationView(SuccessMessageMixin, CreateView):
     """User registration view."""
     form_class = UserCreation
-    text1 = _('User succesfully registered')
-    text2 = _('Registration')
-    text3 = _('Register')
-    success_message = text1
+    success_message = _('User succesfully registered')
     success_url = reverse_lazy('login')
     template_name = 'form.html'
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Registration'),
+                     'button': _('Register')}
 
 
 class UserListView(generic.ListView):
     model = SiteUser
 
 
-class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin2, generic.DeleteView):
     login_url = '/login/'
     model = SiteUser
-    text1 = _('User succesfully deleted')
-    text2 = _('user')
-    success_message = text1
+    success_message = _('User succesfully deleted')
     success_url = reverse_lazy('user_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
-    extra_context = {'obj_name': text2}
-
-    def dispatch(self, request, *args, **kwargs):
-        site_user = self.get_object()
-        if request.user != site_user:
-            text3 = _('no rights to change')
-            messages.error(request, text3)
-            return HttpResponseRedirect(reverse_lazy('user_list'))
-
-        return super().dispatch(request, *args, **kwargs)
+    extra_context = {'obj_name': _('user')}
 
 
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin2, UpdateView):
     login_url = '/login/'
     form_class = UserCreation
     model = SiteUser
-    text1 = _('User succesfully changed')
-    text2 = _('User change')
-    text3 = _('Change')
-    success_message = text1
+    success_message = _('User succesfully changed')
     success_url = reverse_lazy('user_list')
     template_name = 'form.html'
-    extra_context = {'header': text2,
-                     'button': text3}
-
-    def dispatch(self, request, *args, **kwargs):
-        site_user = self.get_object()
-        if request.user != site_user:
-            text4 = _('no rights to change')
-            messages.error(request, text4)
-            return HttpResponseRedirect(reverse_lazy('user_list'))
-
-        return super().dispatch(request, *args, **kwargs)
+    extra_context = {'header': _('User change'),
+                     'button': _('Change')}

@@ -6,10 +6,8 @@ from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.deletion import ProtectedError
-from django.contrib import messages
-from django.shortcuts import redirect
 from django.utils.translation import gettext as _
+from task_manager.mixins import PermRequiredMixin1
 
 # Create your views here.
 
@@ -18,14 +16,11 @@ class LabelCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """User registration view."""
     login_url = '/login/'
     form_class = LabelForm
-    text1 = _('Label succesfully created')
-    success_message = text1
+    success_message = _('Label succesfully created')
     success_url = reverse_lazy('label_list')
     template_name = 'form.html'
-    text2 = _('Create label')
-    text3 = _('Create')
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Create label'),
+                     'button': _('Create')}
 
 
 class LabelListView(LoginRequiredMixin, generic.ListView):
@@ -33,35 +28,26 @@ class LabelListView(LoginRequiredMixin, generic.ListView):
     model = Label
 
 
-class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+class LabelDeleteView(LoginRequiredMixin,
+                      SuccessMessageMixin,
+                      PermRequiredMixin1,
+                      generic.DeleteView):
     login_url = '/login/'
     model = Label
-    text1 = _('Label succesfully deleted')
-    text2 = _('Labels')
-    success_message = text1
+    success_message = _('Label succesfully deleted')
     success_url = reverse_lazy('label_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
-    extra_context = {'obj_name': text2}
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super().dispatch(request, *args, **kwargs)
-        except ProtectedError:
-            text3 = _('Cannot delete label because it is in use')
-            messages.error(request, text3)
-            return redirect('statuses_list')
+    extra_context = {'obj_name': _('Labels')}
+    error_message = _('Cannot delete label because it is in use')
 
 
 class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login/'
     form_class = LabelForm
     model = Label
-    text1 = _('Label succesfully changed')
-    text2 = _('Label change')
-    text3 = _('Change')
-    success_message = text1
+    success_message = _('Label succesfully changed')
     success_url = reverse_lazy('label_list')
     template_name = 'form.html'
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Label change'),
+                     'button': _('Change')}

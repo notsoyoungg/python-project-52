@@ -8,11 +8,11 @@ from task_manager.users.models import SiteUser
 
 class TestStatuses(TestCase):
 
+    fixtures = ['task.yaml', 'status.yaml', 'label.yaml', 'user.yaml']
+
     def setUp(self):
-        self.test_status = Statuses.objects.create(name='status1')
-        self.test_status.save()
-        self.test_user1 = SiteUser.objects.create_user(username='testuser1', password='12345')
-        self.test_user1.save()
+        self.test_status = Statuses.objects.get(pk=1)
+        self.test_user1 = SiteUser.objects.get(pk=1)
 
     def test_status_create_view(self):
         user = self.test_user1

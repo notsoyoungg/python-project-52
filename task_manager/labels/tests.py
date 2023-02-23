@@ -6,13 +6,13 @@ from task_manager.users.models import SiteUser
 # Create your tests here.
 
 
-class TestStatuses(TestCase):
+class TestLabels(TestCase):
+
+    fixtures = ['task.yaml', 'status.yaml', 'label.yaml', 'user.yaml']
 
     def setUp(self):
-        self.test_label = Label.objects.create(name='label1')
-        self.test_label.save()
-        self.test_user1 = SiteUser.objects.create_user(username='testuser1', password='12345')
-        self.test_user1.save()
+        self.test_label = Label.objects.get(pk=1)
+        self.test_user1 = SiteUser.objects.get(pk=1)
 
     def test_label_create_view(self):
         user = self.test_user1

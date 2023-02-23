@@ -11,4 +11,4 @@ class SiteUser(AbstractUser):
 
     def __str__(self):
         """Represent an instance as a string."""
-        return f'{self.first_name} {self.last_name}'
+        return self.get_full_name()

@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext as _
+from task_manager.mixins import PermRequiredMixin1
 
 # Create your views here.
 
@@ -19,12 +20,9 @@ class StatuseCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login/'
     form_class = StatuseForm
     template_name = 'form.html'
-    text1 = _('Status succesfully created')
-    text2 = _('Create status')
-    text3 = _('Create')
-    extra_context = {'header': text2,
-                     'button': text3}
-    success_message = text1
+    extra_context = {'header': _('Create status'),
+                     'button': _('Create')}
+    success_message = _('Status succesfully created')
     success_url = reverse_lazy('statuses_list')
 
 
@@ -33,35 +31,23 @@ class StatusesListView(LoginRequiredMixin, SuccessMessageMixin, generic.ListView
     model = Statuses
 
 
-class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin1, generic.DeleteView):
     login_url = '/login/'
     model = Statuses
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
-    text1 = _('Status succesfully deleted')
-    text2 = _('status')
-    extra_context = {'obj_name': text2}
-    success_message = text1
+    extra_context = {'obj_name': _('status')}
+    success_message = _('Status succesfully deleted')
     success_url = reverse_lazy('statuses_list')
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super().dispatch(request, *args, **kwargs)
-        except ProtectedError:
-            text3 = _('Cannot delete status because it is in use')
-            messages.error(request, text3)
-            return redirect('statuses_list')
+    error_message = _('Cannot delete status because it is in use')
 
 
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login/'
     form_class = StatuseForm
     model = Statuses
-    text1 = _('Status succesfully changed')
-    text2 = _('Status change')
-    text3 = _('Change')
-    success_message = text1
+    success_message = _('Status succesfully changed')
     success_url = reverse_lazy('statuses_list')
     template_name = 'form.html'
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Status change'),
+                     'button': _('Change')}

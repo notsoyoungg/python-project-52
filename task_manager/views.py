@@ -12,17 +12,13 @@ def index(request):
 
 class UserLoginView(SuccessMessageMixin, views.LoginView):
     next_page = reverse_lazy('index')
-    text = _('You are logged in')
-    success_message = text
+    success_message = _('You are logged in')
 
 
 class UserLogoutView(SuccessMessageMixin, views.LogoutView):
-    text = _('You are logged out')
-    success_message = text
     next_page = reverse_lazy('index')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            text = _('You are logged out')
-            messages.info(request, text)
+            messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)

@@ -17,13 +17,10 @@ class TaskCreationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login/'
     form_class = TaskForm
     template_name = 'form.html'
-    text1 = _('Task succesfully created')
-    text2 = _('Create task')
-    text3 = _('Create')
-    success_message = text1
+    success_message = _('Task succesfully created')
     success_url = reverse_lazy('tasks_list')
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Create task'),
+                     'button': _('Create')}
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -43,13 +40,11 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     login_url = '/login/'
     model = Tasks
-    text1 = _('Task succesfully deleted')
-    text2 = _('task')
-    success_message = text1
+    success_message = _('Task succesfully deleted')
     success_url = reverse_lazy('tasks_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
-    extra_context = {'obj_name': text2}
+    extra_context = {'obj_name': _('task')}
 
     def dispatch(self, request, *args, **kwargs):
         task = self.get_object()
@@ -62,12 +57,9 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login/'
     form_class = TaskForm
     template_name = 'form.html'
-    text1 = _('Task succesfully changed')
-    text2 = _('Tasks change')
-    text3 = _('Change')
-    extra_context = {'header': text2,
-                     'button': text3}
+    extra_context = {'header': _('Tasks change'),
+                     'button': _('Change')}
     model = Tasks
-    success_message = text1
+    success_message = _('Task succesfully changed')
     success_url = reverse_lazy('tasks_list')
     template_name = 'form.html'
