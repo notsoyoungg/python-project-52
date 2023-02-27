@@ -1,20 +1,20 @@
 from django.db import models
-from task_manager.users.models import SiteUser
 from task_manager.statuses.models import Statuses
 from task_manager.labels.models import Label
 from django.utils.translation import gettext as _
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
 
 class Tasks(models.Model):
     name = models.CharField(max_length=150, verbose_name=_('Name'))
-    creator = models.ForeignKey(SiteUser, on_delete=models.PROTECT)
+    creator = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     description = models.TextField(verbose_name=_('Description'),
                                    null=True,
                                    blank=True)
     status = models.ForeignKey(Statuses, on_delete=models.PROTECT, verbose_name=_('Status'))
-    executor = models.ForeignKey(SiteUser, on_delete=models.PROTECT,
+    executor = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                  verbose_name=_('Executor'),
                                  related_name='executor',
                                  null=True,

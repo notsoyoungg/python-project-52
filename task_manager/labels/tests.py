@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Label
 from task_manager.users.models import SiteUser
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your tests here.
 
@@ -21,11 +23,14 @@ class TestLabels(TestCase):
         response1 = self.client.get(url)
         data = {'name': 'Приоритет №1'}
         response2 = self.client.post(url, data)
-        label = Label.objects.filter(name='Приоритет №1')
+        storage = messages.get_messages(response2.wsgi_request)
+        message = list(storage)[0]
+        label = Label.objects.get(name='Приоритет №1')
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
+        self.assertEqual(message.message, 'Метка успешно создана')
         self.assertRedirects(response2, reverse('label_list'))
-        self.assertEqual(label.count(), 1)
+        self.assertTrue(label)
 
     def test_label_update_view(self):
         user = self.test_user1
@@ -34,11 +39,14 @@ class TestLabels(TestCase):
         response1 = self.client.get(url)
         data = {'name': 'Можно не делать'}
         response2 = self.client.post(url, data)
-        label = Label.objects.filter(name='Можно не делать')
+        storage = messages.get_messages(response2.wsgi_request)
+        message = list(storage)[0]
+        label = Label.objects.get(name='Можно не делать')
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
+        self.assertEqual(message.message, 'Метка успешно изменена')
         self.assertRedirects(response2, reverse('label_list'))
-        self.assertEqual(label.count(), 1)
+        self.assertTrue(label)
 
     def test_label_delete_view(self):
         label_id = self.test_label.pk
@@ -47,8 +55,11 @@ class TestLabels(TestCase):
         url = reverse('label_delete', args=(label_id,))
         response1 = self.client.get(url)
         response2 = self.client.post(url)
-        label = Label.objects.filter(name='label1')
+        storage = messages.get_messages(response2.wsgi_request)
+        message = list(storage)[0]
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
+        self.assertEqual(message.message, 'Метка успешно удалена')
         self.assertRedirects(response2, reverse('label_list'))
-        self.assertEqual(label.count(), 0)
+        with self.assertRaises(ObjectDoesNotExist):
+            Label.objects.get(name='label1')

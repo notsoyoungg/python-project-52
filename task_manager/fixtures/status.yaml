@@ -3,3 +3,8 @@
   fields:
     name: In progress
     created_at: 2023-12-21
+- model: statuses.statuses
+  pk: 2
+  fields:
+    name: abandoned
+    created_at: 2023-12-22

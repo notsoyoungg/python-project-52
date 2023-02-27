@@ -7,7 +7,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
-from task_manager.mixins import PermRequiredMixin1
+from task_manager.mixins import ProtectionCheckMixin
 
 # Create your views here.
 
@@ -30,7 +30,7 @@ class LabelListView(LoginRequiredMixin, generic.ListView):
 
 class LabelDeleteView(LoginRequiredMixin,
                       SuccessMessageMixin,
-                      PermRequiredMixin1,
+                      ProtectionCheckMixin,
                       generic.DeleteView):
     login_url = '/login/'
     model = Label
