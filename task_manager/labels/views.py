@@ -33,6 +33,7 @@ class LabelDeleteView(LoginRequiredMixin,
                       ProtectionCheckMixin,
                       generic.DeleteView):
     login_url = '/login/'
+    error_url = 'label_list'
     model = Label
     success_message = _('Label succesfully deleted')
     success_url = reverse_lazy('label_list')

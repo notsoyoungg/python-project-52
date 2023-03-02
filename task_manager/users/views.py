@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
-from task_manager.mixins import PermRequiredMixin
+from task_manager.mixins import ProtectionCheckMixin, ModifiedUserPassesTestMixin
 from django.contrib.auth import get_user_model
 
 # Create your views here.
@@ -28,22 +28,31 @@ class UserListView(generic.ListView):
 
 class UserDeleteView(LoginRequiredMixin,
                      SuccessMessageMixin,
-                     PermRequiredMixin,
+                     ModifiedUserPassesTestMixin,
+                     ProtectionCheckMixin,
                      generic.DeleteView):
     login_url = '/login/'
+    error_url = 'user_list'
     model = get_user_model()
     success_message = _('User succesfully deleted')
+    error_message = _('Cannot delete user because it is in use')
     success_url = reverse_lazy('user_list')
     template_name = 'confirm_delete.html'
     context_object_name = 'object'
     extra_context = {'obj_name': _('user')}
 
 
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, PermRequiredMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin,
+                     SuccessMessageMixin,
+                     ModifiedUserPassesTestMixin,
+                     ProtectionCheckMixin,
+                     UpdateView):
     login_url = '/login/'
+    error_url = 'user_list'
     form_class = UserCreation
     model = get_user_model()
     success_message = _('User succesfully changed')
+    error_message = _('No rights to change another user')
     success_url = reverse_lazy('user_list')
     template_name = 'form.html'
     extra_context = {'header': _('User change'),

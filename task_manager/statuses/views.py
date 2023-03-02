@@ -33,6 +33,7 @@ class StatusDeleteView(LoginRequiredMixin,
                        ProtectionCheckMixin,
                        generic.DeleteView):
     login_url = '/login/'
+    error_url = 'statuses_list'
     model = Statuses
     template_name = 'confirm_delete.html'
     context_object_name = 'object'

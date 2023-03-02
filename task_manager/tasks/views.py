@@ -5,10 +5,11 @@ from task_manager.tasks.forms import TaskForm
 from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.detail import DetailView
 from django.utils.translation import gettext as _
+from django.contrib import messages
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -37,7 +38,10 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Tasks
 
 
-class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+class TaskDeleteView(LoginRequiredMixin,
+                     SuccessMessageMixin,
+                     UserPassesTestMixin,
+                     generic.DeleteView):
     login_url = '/login/'
     model = Tasks
     success_message = _('Task succesfully deleted')
@@ -46,11 +50,14 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView
     context_object_name = 'object'
     extra_context = {'obj_name': _('task')}
 
-    def dispatch(self, request, *args, **kwargs):
+    def test_func(self):
         task = self.get_object()
-        if request.user != task.creator:
-            raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)
+        return self.request.user == task.creator
+
+    def handle_no_permission(self):
+        if self.raise_exception or self.request.user.is_authenticated:
+            messages.error(self.request, _('Only the author can delete a task'))
+            return redirect('tasks_list')
 
 
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
