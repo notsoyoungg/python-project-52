@@ -1,0 +1,16 @@
+{
+    "user": {
+        "first_name": "Perrito",
+        "last_name": "jobs",
+        "username": "testuser",
+        "password1": 1234,
+        "password2": 1234
+    },
+    "updated_user": {
+        "first_name": "Perrito",
+        "last_name": "jobs",
+        "username": "second_testuser",
+        "password1": 1234,
+        "password2": 1234
+    }
+}

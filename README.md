@@ -15,7 +15,8 @@ git clone git@github.com:notsoyoungg/python-project-52.git
 ```
 make install
 ```
-
-Сreate .env file in the root directory of the project with the following variables:
+```
+cp .env.sample .env
+```
 - SECRET_KEY - Django secret key
-- ROLLBAR_KEY - Rollbar access token
+- ROLLBAR_TOKEN - Rollbar access token

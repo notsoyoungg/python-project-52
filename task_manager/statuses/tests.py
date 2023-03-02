@@ -4,6 +4,7 @@ from .models import Statuses
 from task_manager.users.models import SiteUser
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext as _
 
 # Create your tests here.
 
@@ -24,12 +25,11 @@ class TestStatuses(TestCase):
         response1 = self.client.get(url)
         data = {'name': 'В работе'}
         response2 = self.client.post(url, data)
-        storage = messages.get_messages(response2.wsgi_request)
-        message = list(storage)[0]
         status = Statuses.objects.get(name='В работе')
+        messsages = map(lambda item: item.message, messages.get_messages(response2.wsgi_request))
+        self.assertIn(_('Status succesfully created'), messsages)
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
-        self.assertEqual(message.message, 'Статус успешно создан')
         self.assertRedirects(response2, reverse('statuses_list'))
         self.assertTrue(status)
 
@@ -40,12 +40,11 @@ class TestStatuses(TestCase):
         response1 = self.client.get(url)
         data = {'name': 'Исполнено'}
         response2 = self.client.post(url, data)
-        storage = messages.get_messages(response2.wsgi_request)
-        message = list(storage)[0]
         status = Statuses.objects.get(name='Исполнено')
+        messsages = map(lambda item: item.message, messages.get_messages(response2.wsgi_request))
+        self.assertIn(_('Status succesfully changed'), messsages)
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
-        self.assertEqual(message.message, 'Статус успешно изменён')
         self.assertRedirects(response2, reverse('statuses_list'))
         self.assertTrue(status)
 
@@ -57,11 +56,10 @@ class TestStatuses(TestCase):
         url = reverse('status_delete', args=(status_id,))
         response1 = self.client.get(url)
         response2 = self.client.post(url)
-        storage = messages.get_messages(response2.wsgi_request)
-        message = list(storage)[0]
+        messsages = map(lambda item: item.message, messages.get_messages(response2.wsgi_request))
+        self.assertIn(_('Status succesfully deleted'), messsages)
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
-        self.assertEqual(message.message, 'Статус успешно удалён')
         self.assertRedirects(response2, reverse('statuses_list'))
         with self.assertRaises(ObjectDoesNotExist):
             Statuses.objects.get(name=status_name)
