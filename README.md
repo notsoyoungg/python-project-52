@@ -5,7 +5,7 @@
 [![my linter](https://github.com/notsoyoungg/python-project-52/actions/workflows/linter.yml/badge.svg)](https://github.com/notsoyoungg/python-project-52/actions/workflows/linter.yml)
 [![my tests](https://github.com/notsoyoungg/python-project-52/actions/workflows/tests.yml/badge.svg)](https://github.com/notsoyoungg/python-project-52/actions/workflows/tests.yml)
 ### App on Railway:
-[python-project-52-production-a798.up.railway.app](http://python-project-52-production-a798.up.railway.app)
+[python-project-52-production-a798.up.railway.app](http://python-project-52-production-a798.up.railway.app) (removed !)
 ### Description of project:
 Task Manager is a task management system similar to http://www.redmine.org/. It allows you to set tasks, assign performers and change their statuses. Registration and authentication are required to work with the system.
 ### How to install:
